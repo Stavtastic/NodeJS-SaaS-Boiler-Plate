@@ -7,12 +7,18 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require("passport");
 
+// LowDB (because I suck with database technology
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+
+// Set some defaults (required if your JSON file is empty)
+// db.defaults({users: []})
+//     .write();
+
 //passport config:
 require('./config/passport')(passport)
-//mongoose
-mongoose.connect('mongodb://localhost/test',{useNewUrlParser: true, useUnifiedTopology : true})
-.then(() => console.log('connected,,'))
-.catch((err)=> console.log(err));
 
 //EJS
 app.set('view engine','ejs');
