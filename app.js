@@ -48,4 +48,4 @@ app.use('/users',require('./routes/users'));
 app.use('/dashboard',require('./routes/dashboard'));
 app.use('/api',require('./routes/api'));
 
-app.listen(3000); 
+app.listen(process.env.PORT || 3000);
