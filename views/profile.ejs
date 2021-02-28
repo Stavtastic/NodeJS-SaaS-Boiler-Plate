@@ -32,9 +32,7 @@
                 <h6>Welcome <%= user.name %></h6>
 
             </li>
-            <!-- Include dynamic menu -->
             <%- include('dashboard-menu'); %>
-
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -42,8 +40,27 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <div class="row">
-
+            <div class="row mt-md-5">
+                <h2 class="mb-4">Manage your profile:</h2>
+            </div>
+            <div class="row p-3">
+                <div class="col-md-4 bg-white rounded p-3">
+                    <form action="/dashboard/profile" method="POST" class="pr-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control shadow-sm" id="name" name="name" placeholder="John Smith" value="<%= user.name %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="company" class="form-label">Company Name</label>
+                            <input type="text" class="form-control shadow-sm" id="company" name="company" placeholder="ACME ltd." value="<%= user.company %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyregistrationnumber" class="form-label">Company RegistrationNumber</label>
+                            <input type="text" class="form-control shadow-sm" id="companyregistrationnumber" name="companyregistrationnumber" placeholder="ACME ltd." value="<%= user.companyregistrationnumber %>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update profile</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

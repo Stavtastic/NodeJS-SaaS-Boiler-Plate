@@ -3,6 +3,15 @@
     {
       "email": "a@a",
       "password": "$2b$10$o5B.q7HJ5DxsUPHA7gIKCOH8xK/ftLGPur6J5oSiuPFjdSwNQYMgG"
+    },
+    {
+      "email": "justin.stavasius@gmail.com",
+      "password": "$2b$10$jrQoOsMDkybw6XdUM0a0K.HuI2jjEWQY0RBpgWxPDs9aSnASaiWJe",
+      "name": "John Smith",
+      "company": "Legend Inc",
+      "companyregistrationnumber": "123456",
+      "subscription": true,
+      "appCount": 2
     }
   ]
 }

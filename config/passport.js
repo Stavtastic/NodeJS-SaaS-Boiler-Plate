@@ -30,11 +30,11 @@ module.exports = function(passport){
         })
     )
     passport.serializeUser(function(user,done) {
-        console.log('serialize: ' + user)
+        //console.log('serialize: ' + user)
         done(null,user);
     });
     passport.deserializeUser(function(user,done){
-        console.log('deserialize: ' + user)
+        //console.log('deserialize: ' + user)
         // User.findById(id,function(err,user){
         //     done(err,user);
         // })

@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
 const app = express();
 const expressEjsLayout = require('express-ejs-layouts')
@@ -23,6 +22,8 @@ require('./config/passport')(passport)
 //EJS
 app.set('view engine','ejs');
 app.use(expressEjsLayout);
+app.use("/images", express.static(__dirname + '/public/images'));
+app.use("/css", express.static(__dirname + '/public/css'));
 //BodyParser
 app.use(express.urlencoded({extended : false}));
 //express session
@@ -44,5 +45,7 @@ app.use((req,res,next)=> {
 //Routes
 app.use('/',require('./routes/index'));
 app.use('/users',require('./routes/users'));
+app.use('/dashboard',require('./routes/dashboard'));
+app.use('/api',require('./routes/api'));
 
 app.listen(3000); 
