@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 const bcrypt = require('bcrypt');
 
 // LowDB (because I suck with database technology

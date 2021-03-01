@@ -5,6 +5,7 @@ const expressEjsLayout = require('express-ejs-layouts')
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require("passport");
+const cors = require('cors');
 
 // LowDB (because I suck with database technology
 const low = require('lowdb');
@@ -40,7 +41,14 @@ app.use((req,res,next)=> {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error  = req.flash('error');
     next();
-    })
+    });
+// Enable CORS for cross domain API requests.
+app.use(cors());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
     
 //Routes
 app.use('/',require('./routes/index'));
