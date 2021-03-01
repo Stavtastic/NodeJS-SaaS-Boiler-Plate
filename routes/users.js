@@ -80,7 +80,7 @@ res.render('register', {
                     newUser.password = hash;
                 //save user
                 // newUser.save()
-                db.get('users').push({ email: email, password: hash, name: name, subscription: false, appCount: 0}).write();
+                db.get('users').push({ email: email, password: hash, name: name, subscription: false, appCount: 0, profile: "member"}).write();
                 // .then((value)=>{
                 //     console.log(value)
                     req.flash('success_msg','You have now registered!');

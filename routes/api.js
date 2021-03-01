@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const bcrypt = require('bcrypt');
 
 // LowDB (because I suck with database technology
@@ -16,7 +17,7 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // POST /login gets urlencoded bodies
-router.post('/login', jsonParser, function (req, res) {
+router.post('/login', cors(), jsonParser, function (req, res) {
     const { email, password, counter } = req.body;
     console.log(email+password+counter)
 

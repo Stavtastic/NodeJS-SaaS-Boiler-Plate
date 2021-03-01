@@ -10,8 +10,9 @@
       "name": "John Smith",
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
-      "subscription": true,
-      "appCount": 2
+      "subscription": false,
+      "appCount": 2,
+      "profile": "admin"
     }
   ]
 }
