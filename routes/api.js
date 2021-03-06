@@ -19,7 +19,6 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 // POST /login gets urlencoded bodies
 router.post('/login', cors(), jsonParser, function (req, res) {
     const { email, password, counter } = req.body;
-    console.log(email+password+counter)
 
     // Find user based on email
     let user = db.get('users').find({ email: email }).value();
@@ -32,11 +31,11 @@ router.post('/login', cors(), jsonParser, function (req, res) {
             if (counter) {
                 db.get('users')
                     .find({ email: email })
-                    .update('appCount', n => n + 1)
+                    .update('credits', n => n - 1)
                     .write();
             }
             // return done(null,user.email);
-            res.send({'authentication': true})
+            res.send({'authentication': true, 'credits': user.credits})
         } else{
             // return done(null,false,{message: 'password incorrect'});
             res.send({'authentication': false})

@@ -11,7 +11,7 @@
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
       "subscription": false,
-      "appCount": 2,
+      "credits": 999,
       "profile": "admin"
     },
     {
@@ -21,7 +21,7 @@
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
       "subscription": true,
-      "appCount": 2,
+      "credits": 999,
       "profile": "admin"
     }
   ]
