@@ -24,5 +24,6 @@
       "credits": 999,
       "profile": "admin"
     }
-  ]
+  ],
+  "stripe": []
 }

@@ -79,6 +79,8 @@ router.get('/billing',ensureAuthenticated,(req,res)=>{
     });
 });
 
+// Stripe Process
+
 // Fetch the Checkout Session to display the JSON result on the success page
 router.get("/checkout-session", async (req, res) => {
     const { sessionId } = req.query;
@@ -86,8 +88,17 @@ router.get("/checkout-session", async (req, res) => {
     res.send(session);
 });
 
-router.post("/create-checkout-session", cors(), async (req, res) => {
-    const domainURL = process.env.DOMAIN;
+router.post("/create-checkout-session", cors(), ensureAuthenticated, async (req, res) => {
+    // Ensure CORS because fetch is not being nice in some browsers.
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    // Get user data based on Passport.
+    sessionUser = db.get('users').find({ email: req.user }).value();
+    //console.log(sessionUser);
+
+    // Set stripe data.
+    const domainURL = "http://localhost:3000";
     const { priceId } = req.body;
 
     // Create new Checkout Session for the order
@@ -100,6 +111,8 @@ router.post("/create-checkout-session", cors(), async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             mode: "subscription",
             payment_method_types: ["card"],
+            customer: null,
+            customer_email: sessionUser.email,
             line_items: [
                 {
                     price: priceId,
@@ -107,9 +120,12 @@ router.post("/create-checkout-session", cors(), async (req, res) => {
                 },
             ],
             // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-            success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${domainURL}/canceled.html`,
+            success_url: `${domainURL}/dashboard/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${domainURL}/dashboard/billing/`,
         });
+
+        // Store Session ID in our database so we can process the status on success.
+        db.get('stripe').push({ session: session.id, email: sessionUser.email, paid: false}).write();
 
         res.send({
             sessionId: session.id,
@@ -122,6 +138,15 @@ router.post("/create-checkout-session", cors(), async (req, res) => {
             }
         });
     }
+});
+
+router.get("/billing/success", (req,res)=>{
+    // Get session ID
+    const sessionID = req.query.session_id;
+    console.log(sessionID);
+    // Get user data based on Passport.
+    //sessionUser = db.get('users').find({ email: req.user }).value();
+    res.send("success");
 });
 
 router.get("/setup", (req, res) => {
