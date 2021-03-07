@@ -3,7 +3,7 @@ const router  = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
 const path = require('path');
 const cors = require('cors');
-// LowDB (because I suck with database technology
+// LowDB (because I suck with database technology)
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
@@ -67,10 +67,26 @@ router.post('/profile',ensureAuthenticated,(req,res)=>{
 });
 
 // Billing
-router.get('/billing',ensureAuthenticated,(req,res)=>{
+router.get('/billing',ensureAuthenticated, async (req,res)=>{
     // Get user data based on Passport.
     sessionUser = db.get('users').find({ email: req.user }).value();
-    console.log(sessionUser)
+    console.log(sessionUser);
+    // Create customer ID with stripe if we don't have it.
+    if (sessionUser.customerId == null) {
+        try {
+            const customer = await stripe.customers.create({
+                email: sessionUser.email,
+                name: sessionUser.company,
+                description: sessionUser.name,
+            });
+            db.get('users')
+                .find({ email: req.user })
+                .assign({ customerId: customer.id})
+                .write();
+        } catch (e) {
+            console.log(e)
+        }
+    }
     // Pass user data in render.
     res.render('billing',{
         user: sessionUser,
@@ -80,7 +96,6 @@ router.get('/billing',ensureAuthenticated,(req,res)=>{
 });
 
 // Stripe Process
-
 // Fetch the Checkout Session to display the JSON result on the success page
 router.get("/checkout-session", async (req, res) => {
     const { sessionId } = req.query;
@@ -111,8 +126,7 @@ router.post("/create-checkout-session", cors(), ensureAuthenticated, async (req,
         const session = await stripe.checkout.sessions.create({
             mode: "subscription",
             payment_method_types: ["card"],
-            customer: null,
-            customer_email: sessionUser.email,
+            customer: sessionUser.customerId,
             line_items: [
                 {
                     price: priceId,
@@ -121,7 +135,7 @@ router.post("/create-checkout-session", cors(), ensureAuthenticated, async (req,
             ],
             // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
             success_url: `${domainURL}/dashboard/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${domainURL}/dashboard/billing/`,
+            cancel_url: `${domainURL}/dashboard/billing/error?session_id={CHECKOUT_SESSION_ID}`,
         });
 
         // Store Session ID in our database so we can process the status on success.
@@ -140,13 +154,36 @@ router.post("/create-checkout-session", cors(), ensureAuthenticated, async (req,
     }
 });
 
+// Stripe Successfull Payment
 router.get("/billing/success", (req,res)=>{
     // Get session ID
     const sessionID = req.query.session_id;
-    console.log(sessionID);
-    // Get user data based on Passport.
-    //sessionUser = db.get('users').find({ email: req.user }).value();
-    res.send("success");
+    //console.log(sessionID);
+    // Get check out session ID data
+    stripeSessionData = db.get('stripe').find({ session: req.query.session_id }).value();
+    console.log(stripeSessionData);
+    // Update the stripe payment status
+    db.get('stripe')
+        .find({ session: req.query.session_id })
+        .assign({ paid: true})
+        .write();
+    // Update the user subscription status
+    db.get('users')
+        .find({ email: stripeSessionData.email })
+        .assign({ subscription: true, credits: 100000})
+        .write();
+    // Redirect to page afterwards.
+    res.redirect('/dashboard')
+});
+
+// Stripe Failed Payment
+router.get("/billing/error", (req,res)=>{
+    // Remove the stripe payment from the database to keep things clean :)
+    db.get('stripe')
+        .remove({ session: req.query.session_id })
+        .write();
+    // Redirect to page afterwards.
+    res.redirect('/dashboard')
 });
 
 router.get("/setup", (req, res) => {

@@ -10,9 +10,10 @@
       "name": "John Smith",
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
-      "subscription": false,
-      "credits": 999,
-      "profile": "admin"
+      "subscription": true,
+      "credits": 100000,
+      "profile": "admin",
+      "customerId": "cus_J4BsUEHWKHi7S7"
     },
     {
       "email": "justin.stavasius2@gmail.com",
@@ -22,8 +23,35 @@
       "companyregistrationnumber": "123456",
       "subscription": true,
       "credits": 999,
-      "profile": "admin"
+      "profile": "admin",
+      "customerId": null
     }
   ],
-  "stripe": []
+  "stripe": [
+    {
+      "session": "cs_test_a1Tj7GnvKa3Ouh8Um7T78Jo4wluKdvCVUTeLohV1DAVgG6MCTY99XqKn2X",
+      "email": "justin.stavasius@gmail.com",
+      "paid": false
+    },
+    {
+      "session": "cs_test_a16b7ildZ2b5eRiAjhc08s9cU0xpgE4cKzbj21tlxXlLx7xFisYoUT2ZIP",
+      "email": "justin.stavasius@gmail.com",
+      "paid": false
+    },
+    {
+      "session": "cs_test_a1HGz8qeknNG5qidcmpI4e6HNCyQY2JkTcAvF1fwE9hVzC1L9577kJ8V8n",
+      "email": "justin.stavasius@gmail.com",
+      "paid": false
+    },
+    {
+      "session": "cs_test_a1UOA3BnAiywp7RzrFGn8HPG80fmLFBGO4hrCI1vrxn4d8GruGK5bIRsoG",
+      "email": "justin.stavasius@gmail.com",
+      "paid": true
+    },
+    {
+      "session": "cs_test_a1cQ2MsduDZTG7AbN3fuXDBW1FgoEBSVETwfGSxXd0Z0ubCbX8ZUJlLSiE",
+      "email": "justin.stavasius@gmail.com",
+      "paid": true
+    }
+  ]
 }
