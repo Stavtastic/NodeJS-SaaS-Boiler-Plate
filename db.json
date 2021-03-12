@@ -18,39 +18,59 @@
     {
       "email": "justin.stavasius2@gmail.com",
       "password": "$2b$10$jrQoOsMDkybw6XdUM0a0K.HuI2jjEWQY0RBpgWxPDs9aSnASaiWJe",
-      "name": "John Smith",
+      "name": "John2 Smith",
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
       "subscription": true,
-      "credits": 999,
+      "credits": 998,
       "profile": "admin",
+      "customerId": "cus_J5CiNwbxkMOukx"
+    },
+    {
+      "email": "justin.stavasius4@gmail.com",
+      "password": "$2b$10$Pta61VeQ2qlS4GJc3AQmjOXUa7ehlE5MXn1WjlObabh8M1emkbaYC",
+      "name": "John Smith",
+      "subscription": true,
+      "credits": 299983,
+      "profile": "member",
+      "customerId": "cus_J6NgDJMcrvQM7Y",
+      "company": "test",
+      "companyregistrationnumber": "123654",
+      "token": "1e86de80-8336-11eb-abd5-3b2002527ec7"
+    },
+    {
+      "email": "justin.stavasius5@gmail.com",
+      "password": "$2b$10$3Rt5BW1Y0gRkuL4Lr.SHku7bnJqhDSeacu82EeQT7XpulUSKrN5S6",
+      "name": "John Smith",
+      "subscription": false,
+      "credits": 0,
+      "profile": "member",
+      "customerId": null
+    },
+    {
+      "email": "justin.stavasius6@gmail.com",
+      "password": "$2b$10$CSeWV/a0ylhZm9gBucMSTesUXGb0mp1L2Nk/glr5yMkSfmqIIHsmy",
+      "name": "John Smith",
+      "subscription": false,
+      "credits": 0,
+      "profile": "member",
       "customerId": null
     }
   ],
   "stripe": [
     {
-      "session": "cs_test_a1Tj7GnvKa3Ouh8Um7T78Jo4wluKdvCVUTeLohV1DAVgG6MCTY99XqKn2X",
-      "email": "justin.stavasius@gmail.com",
-      "paid": false
-    },
-    {
-      "session": "cs_test_a16b7ildZ2b5eRiAjhc08s9cU0xpgE4cKzbj21tlxXlLx7xFisYoUT2ZIP",
-      "email": "justin.stavasius@gmail.com",
-      "paid": false
-    },
-    {
-      "session": "cs_test_a1HGz8qeknNG5qidcmpI4e6HNCyQY2JkTcAvF1fwE9hVzC1L9577kJ8V8n",
-      "email": "justin.stavasius@gmail.com",
-      "paid": false
-    },
-    {
-      "session": "cs_test_a1UOA3BnAiywp7RzrFGn8HPG80fmLFBGO4hrCI1vrxn4d8GruGK5bIRsoG",
-      "email": "justin.stavasius@gmail.com",
+      "session": "cs_test_a1Fuu30MMzYTpYizt9veU5LkuTy3MaoIOn2hsgd1w8EohM50WsSV5HQNYo",
+      "email": "justin.stavasius4@gmail.com",
       "paid": true
     },
     {
-      "session": "cs_test_a1cQ2MsduDZTG7AbN3fuXDBW1FgoEBSVETwfGSxXd0Z0ubCbX8ZUJlLSiE",
-      "email": "justin.stavasius@gmail.com",
+      "session": "cs_test_a16UO6G8qmnGdMSvOBUCcJYQvWv9P6dp4XvRaNyTdGGDAFl0knCXjUMPsz",
+      "email": "justin.stavasius4@gmail.com",
+      "paid": true
+    },
+    {
+      "session": "cs_test_a107MZUQwOF0PeiA118oDGjDCjosOpRLq338IUS3VuObngWsIj9hIMDzOq",
+      "email": "justin.stavasius4@gmail.com",
       "paid": true
     }
   ]

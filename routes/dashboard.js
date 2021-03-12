@@ -3,16 +3,18 @@ const router  = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
 const path = require('path');
 const cors = require('cors');
+const {
+    v1: uuidv1,
+    v4: uuidv4,
+} = require('uuid');
 // LowDB (because I suck with database technology)
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
-
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/account/apikeys
-const stripe = require('stripe')('sk_test_z6weHWkcWn5dYY4ZmurzHdfv005Cc0KVGK'
-);
+const stripe = require('stripe')('sk_test_z6weHWkcWn5dYY4ZmurzHdfv005Cc0KVGK');
 
 //Dashboard
 router.get('/',ensureAuthenticated,(req,res)=>{
@@ -161,7 +163,7 @@ router.get("/billing/success", (req,res)=>{
     //console.log(sessionID);
     // Get check out session ID data
     stripeSessionData = db.get('stripe').find({ session: req.query.session_id }).value();
-    console.log(stripeSessionData);
+    // console.log(stripeSessionData);
     // Update the stripe payment status
     db.get('stripe')
         .find({ session: req.query.session_id })
@@ -170,7 +172,8 @@ router.get("/billing/success", (req,res)=>{
     // Update the user subscription status
     db.get('users')
         .find({ email: stripeSessionData.email })
-        .assign({ subscription: true, credits: 100000})
+        .assign({ subscription: true})
+        .update('credits', n => n + 100000)
         .write();
     // Redirect to page afterwards.
     res.redirect('/dashboard')

@@ -3,8 +3,8 @@ const router  = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
 // LowDB (because I suck with database technology
 const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
+const FileAsync = require('lowdb/adapters/FileSync');
+const adapter = new FileAsync('db.json');
 const db = low(adapter);
 
 //login page
