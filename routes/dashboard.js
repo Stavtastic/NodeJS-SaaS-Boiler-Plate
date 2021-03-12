@@ -9,15 +9,19 @@ const {
 } = require('uuid');
 // LowDB (because I suck with database technology)
 const low = require('lowdb');
+// const FileAsync = require('lowdb/adapters/FileAsync')
 const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
-const db = low(adapter);
+// const adapter = new FileSync('db.json');
+// const db = low(adapter);
+
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/account/apikeys
 const stripe = require('stripe')('sk_test_z6weHWkcWn5dYY4ZmurzHdfv005Cc0KVGK');
 
 //Dashboard
 router.get('/',ensureAuthenticated,(req,res)=>{
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     console.log(req.originalUrl);
     // Get user data based on Passport.
     let sessionUser = db.get('users').find({ email: req.user }).value();
@@ -30,6 +34,8 @@ router.get('/',ensureAuthenticated,(req,res)=>{
 
 // Profile
 router.get('/profile',ensureAuthenticated,(req,res)=>{
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     // Get user data based on Passport.
     let sessionUser = db.get('users').find({ email: req.user }).value();
     // Pass user data in render.
@@ -39,6 +45,8 @@ router.get('/profile',ensureAuthenticated,(req,res)=>{
     });
 });
 router.post('/profile',ensureAuthenticated,(req,res)=>{
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     // Get user data based on Passport.
     let sessionUser = db.get('users').find({ email: req.user }).value();
     // Get form field values from the request body.
@@ -70,6 +78,8 @@ router.post('/profile',ensureAuthenticated,(req,res)=>{
 
 // Billing
 router.get('/billing',ensureAuthenticated, async (req,res)=>{
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     // Get user data based on Passport.
     sessionUser = db.get('users').find({ email: req.user }).value();
     console.log(sessionUser);

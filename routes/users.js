@@ -9,6 +9,11 @@ const FileAsync = require('lowdb/adapters/FileSync');
 const adapter = new FileAsync('db.json');
 const db = low(adapter);
 
+const {
+    v1: uuidv1,
+    v4: uuidv4,
+} = require('uuid');
+
 //login handle
 router.get('/login',(req,res)=>{
     res.render('login');
@@ -75,7 +80,7 @@ router.post('/register',(req,res)=>{
                         newUser.password = hash;
                     //save user
                     // newUser.save()
-                    db.get('users').push({ email: email, password: hash, name: name, subscription: false, credits: 0, profile: "member", customerId: null, token: null}).write();
+                    db.get('users').push({ email: email, password: hash, name: name, subscription: false, credits: 0, profile: "member", customerId: null, token: uuidv1()}).write();
                     // .then((value)=>{
                     //     console.log(value)
                         req.flash('success_msg','You have now registered!');

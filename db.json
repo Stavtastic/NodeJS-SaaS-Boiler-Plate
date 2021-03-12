@@ -11,9 +11,10 @@
       "company": "Legend Inc",
       "companyregistrationnumber": "123456",
       "subscription": true,
-      "credits": 100000,
+      "credits": 99986,
       "profile": "admin",
-      "customerId": "cus_J4BsUEHWKHi7S7"
+      "customerId": "cus_J4BsUEHWKHi7S7",
+      "token": "somerandommanualtokenkappa"
     },
     {
       "email": "justin.stavasius2@gmail.com",
@@ -24,37 +25,28 @@
       "subscription": true,
       "credits": 998,
       "profile": "admin",
-      "customerId": "cus_J5CiNwbxkMOukx"
+      "customerId": "cus_J5CiNwbxkMOukx",
+      "token": "somerandommanualtokenkappa2"
     },
     {
-      "email": "justin.stavasius4@gmail.com",
-      "password": "$2b$10$Pta61VeQ2qlS4GJc3AQmjOXUa7ehlE5MXn1WjlObabh8M1emkbaYC",
-      "name": "John Smith",
-      "subscription": true,
-      "credits": 299983,
-      "profile": "member",
-      "customerId": "cus_J6NgDJMcrvQM7Y",
-      "company": "test",
-      "companyregistrationnumber": "123654",
-      "token": "1e86de80-8336-11eb-abd5-3b2002527ec7"
-    },
-    {
-      "email": "justin.stavasius5@gmail.com",
-      "password": "$2b$10$3Rt5BW1Y0gRkuL4Lr.SHku7bnJqhDSeacu82EeQT7XpulUSKrN5S6",
+      "email": "justin.stavasius3@gmail.com",
+      "password": "$2b$10$sUXwDrpcnkB1JxIMuRC3gOJS/c1OaaBzQTpoTrZ6NouQUzwN/gdii",
       "name": "John Smith",
       "subscription": false,
       "credits": 0,
       "profile": "member",
-      "customerId": null
+      "customerId": null,
+      "token": "c6b0f930-833e-11eb-895f-494744c5d2b4"
     },
     {
       "email": "justin.stavasius6@gmail.com",
-      "password": "$2b$10$CSeWV/a0ylhZm9gBucMSTesUXGb0mp1L2Nk/glr5yMkSfmqIIHsmy",
+      "password": "$2b$10$EWyv/CDuzPuizbS0U1GE8OebpSUe7h/88yrSam.72ZtWQMb6Uf.qu",
       "name": "John Smith",
       "subscription": false,
       "credits": 0,
       "profile": "member",
-      "customerId": null
+      "customerId": null,
+      "token": "71d33ee0-833f-11eb-bfbc-b9ac1e8504ea"
     }
   ],
   "stripe": [
