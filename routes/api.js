@@ -11,8 +11,6 @@ const {
 // LowDB (because I suck with database technology
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
-const db = low(adapter);
 
 // create application/json parser
 const jsonParser = bodyParser.json();
@@ -22,6 +20,8 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // POST /login gets urlencoded bodies
 router.post('/login', cors(), jsonParser, function (req, res) {
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     const { email, password, counter } = req.body;
 
     // Find user based on email
@@ -59,6 +59,8 @@ router.post('/login', cors(), jsonParser, function (req, res) {
 
 // POST /login gets urlencoded bodies
 router.post('/token', cors(), jsonParser, function (req, res) {
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
     const {token, counter} = req.body;
     // Find user based on token
     let user = db.get('users').find({token: token}).value();
