@@ -206,11 +206,13 @@ router.get("/setup", (req, res) => {
     });
 });
 
-router.post('/customer-portal', async (req, res) => {
-    // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-    // Typically this is stored alongside the authenticated user in your database.
-    const { sessionId } = req.body;
-    const checkoutsession = await stripe.checkout.sessions.retrieve(sessionId);
+router.post('/customer-portal', ensureAuthenticated, async (req, res) => {
+    const adapter = new FileSync('db.json');
+    const db = low(adapter);
+    // Get user data based on Passport.
+    sessionUser = db.get('users').find({ email: req.user }).value();
+
+    const checkoutsession = await stripe.checkout.sessions.retrieve(sessionUser.customerId);
 
     // This is the url to which the customer will be redirected when they are done
     // managing their billing with the portal.
